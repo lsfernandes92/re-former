@@ -1,15 +1,25 @@
-<%= form_tag("/users", method: "post") do %>
-  <%= label_tag(:username, "Enter your username") %><br>
-  <%= text_field(:user, :username) %><br>
+<% if @user.errors.any? %>
+  <h2><%= pluralize(@user.errors.count, "error") %> prohibited from being saved:</h2>
 
-  <%= label_tag(:email, "Enter your email") %><br>
-  <%= text_field(:user, :email) %><br>
+  <ul>
+    <%= @user.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
 
-  <%= label_tag(:password, "Enter your password") %><br>
-  <%= password_field(:user, :password) %><br>
+<%= form_for @user do |f| %>
+  <%= f.label :username %></br>
+  <%= f.text_field :username %></br>
 
-  <%= label_tag(:password_confirmation, "Confirm your password") %><br>
-  <%= password_field(:user, :password_confirmation) %><br>
+  <%= f.label :email %></br>
+  <%= f.text_field :email %></br>
 
-  <%= submit_tag 'Submit' %>
+  <%= f.label :password %></br>
+  <%= f.password_field :password %></br>
+
+  <%= f.label :password %></br>
+  <%= f.password_field :password_confirmation %></br>
+
+  <%= f.submit 'Submit' %>
 <% end %>
